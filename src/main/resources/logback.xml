@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true">
+    <property name="APP" value="spring-cloud-gateway"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yy-MM-dd.HH:mm:ss.SSS} [%-16t] %-5p %-22c{0} - %m%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="DETAIL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_HOME}/${APP}_detail.log</File>
+        <encoder>
+            <pattern>%d{yy-MM-dd.HH:mm:ss.SSS} [%-16t] %-5p %-22c{0} - %m%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/${APP}_detail.log.%d{yyyyMMdd}.%i%d{HH}</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender"
+              additivity="false">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <File>${LOG_HOME}/${APP}_error.log</File>
+        <encoder>
+            <pattern>%d{yy-MM-dd.HH:mm:ss.SSS} [%-16t] %-5p %-22c{0} - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/${APP}_error.log.%d{yyyyMMdd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="ACCESS" class="ch.qos.logback.core.rolling.RollingFileAppender"
+              additivity="false">
+        <File>${LOG_HOME}/${APP}_access.log</File>
+        <encoder>
+            <pattern>%d{yy-MM-dd.HH:mm:ss.SSS} [%-16t] %-5p %-22c{0} - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/${APP}_access.log.%d{yyyyMMdd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="INVOCATION" class="ch.qos.logback.core.rolling.RollingFileAppender"
+              additivity="false">
+        <File>${LOG_HOME}/${APP}_invocation.log</File>
+        <encoder>
+            <pattern>%d{yy-MM-dd.HH:mm:ss.SSS} [%-16t] %-5p %-22c{0} - %m%n</pattern>
+        </encoder>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/${APP}_invocation.log.%d{yyyyMMdd}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="org.springframework.cloud.gateway" level="TRACE"/>
+    <logger name="org.springframework.http.server.reactive" level="ERROR"/>
+    <logger name="org.springframework.web.reactive" level="ERROR"/>
+    <logger name="org.springframework.boot.autoconfigure.web" level="ERROR"/>
+    <logger name="reactor.netty" level="ERROR"/>
+<!--    <logger name="redisratelimiter" level="INFO"/>-->
+
+    <root level="DEBUG">
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

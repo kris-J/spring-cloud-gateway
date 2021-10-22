@@ -1,0 +1,28 @@
+server:
+  port: 8081
+  tomcat:
+    max-threads: 500
+
+# spring-gateway
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: http_index
+          uri: http://localhost:8080
+          predicates:
+            - Path=/index/index
+
+        - id: http_index2
+          uri: http://localhost:8080
+          filters:
+            - AddRequestParameter=color,RED
+            - AddResponseHeader=X-Response-Red, Blue
+          predicates:
+            - Path=/index/index2
+
+        - id: http_index3
+          uri: jsf://com.jd.jr.cbp.abs.api.facade.commercial.DraftFacade/queryAcceptorName/local/com.jd.jr.cbp.abs.api.domain.request.commercial.AcceptorNameQueryReq
+          predicates:
+            - Path=/index/index3
+
