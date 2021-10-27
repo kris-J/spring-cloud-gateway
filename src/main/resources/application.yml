@@ -7,6 +7,8 @@ server:
 
 # spring-gateway
 spring:
+  main:
+    web-application-type: reactive
   cloud:
     gateway:
       routes:
@@ -32,7 +34,7 @@ spring:
             - Path=/index/index2
 
         - id: http_index3
-          uri: jsf://com.jd.jr.cbp.abs.api.facade.commercial.DraftFacade/queryAcceptorName/local/com.jd.jr.cbp.abs.api.domain.request.commercial.AcceptorNameQueryReq
+          uri: jsf://com.jd.jr.cbp.abs.api.facade.commercial.DraftFacade/queryAcceptorName/beta/com.jd.jr.cbp.abs.api.domain.request.commercial.AcceptorNameQueryReq
           predicates:
             - Path=/index/index3
 

@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
  * date: 2021/10/20 21:51
  * author: fangjie24
  */
-@Component
+//@Component
 public class ModifiedResponseFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {

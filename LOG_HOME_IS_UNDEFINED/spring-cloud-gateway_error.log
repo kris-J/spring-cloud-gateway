@@ -1,167 +1,253 @@
-21-10-26.09:35:56.701 [main            ] ERROR LoggingFailureAnalysisReporter - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Spring MVC found on classpath, which is incompatible with Spring Cloud Gateway.
-
-Action:
-
-Please set spring.main.web-application-type=reactive or remove spring-boot-starter-web dependency.
-
-21-10-26.10:27:38.482 [JSF-jsfRegistry-HB&Retry-7-T-1] ERROR RegistryServiceClient  - Send heartbeat to 11.50.214.21:40660 error
-com.jd.jsf.gd.error.RpcException: [JSF-22103]Failed to call com.jd.jsf.service.RegistryService.doHeartbeat on remote server: [jsf://11.50.214.21:40660/?jsfVersion=1551], cause by: com.jd.jsf.gd.error.ClientTimeoutException, message is: [JSF-22110]Waiting provider return response timeout. Start time: 2021-10-26 10:23:52.258, End time: 2021-10-26 10:24:07.569, Client elapsed: 1487ms, Server elapsed: 13824ms, Timeout: 5000ms, MsgHeader: MessageHeader{msgId=5, length=347, codecType=2, msgType=1, protocolType=1, compressType=0, headerLength=19, keysMap= 1 : 5000 7 : 1744}, Channel: 10.13.153.169:56838 -> 11.50.214.21:40660.
-	at com.jd.jsf.gd.client.FailoverClient.doSendMsg(FailoverClient.java:94)
-	at com.jd.jsf.gd.client.TransportResettableClient.doSendMsg(TransportResettableClient.java:43)
-	at com.jd.jsf.gd.client.Client.sendMsg(Client.java:550)
-	at com.jd.jsf.gd.filter.ConsumerInvokeFilter.invoke(ConsumerInvokeFilter.java:80)
-	at com.jd.jsf.gd.filter.ConsumerMonitorFilter.invoke(ConsumerMonitorFilter.java:59)
-	at com.jd.jsf.gd.filter.ConsumerConcurrentsFilter.invoke(ConsumerConcurrentsFilter.java:80)
-	at com.jd.jsf.gd.filter.MockFilter.invoke(MockFilter.java:56)
-	at com.jd.jsf.gd.filter.ConsumerContextFilter.invoke(ConsumerContextFilter.java:56)
-	at com.jd.jsf.gd.filter.ConsumerExceptionFilter.invoke(ConsumerExceptionFilter.java:29)
-	at com.jd.jsf.gd.filter.FilterChain.invoke(FilterChain.java:292)
-	at com.jd.jsf.gd.client.ClientProxyInvoker.invoke(ClientProxyInvoker.java:111)
-	at com.jd.jsf.service.RegistryService_proxy_0.doHeartbeat(RegistryService_proxy_0.java)
-	at com.jd.jsf.gd.registry.jsf.RegistryServiceClient.doHeartbeat(RegistryServiceClient.java:283)
-	at com.jd.jsf.gd.registry.jsf.RegistryServiceClient.sendHeartBeat(RegistryServiceClient.java:411)
-	at com.jd.jsf.gd.registry.jsf.RegistryServiceClient.access$100(RegistryServiceClient.java:41)
-	at com.jd.jsf.gd.registry.jsf.RegistryServiceClient$1.run(RegistryServiceClient.java:353)
+21-10-27.14:42:21.328 [reactor-http-nio-2] ERROR AbstractErrorWebExceptionHandler - [14508aed-1]  500 Server Error for HTTP GET "/index/index0"
+java.lang.ClassCastException: org.example.config.ModifiedRequestDecorator$1 cannot be cast to org.springframework.http.server.reactive.AbstractServerHttpRequest
+	at org.example.filters.LogGlobalFilter.filter(LogGlobalFilter.java:33)
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	|_ checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	|_ checkpoint ⇢ HTTP GET "/index/index0" [ExceptionHandlingWebHandler]
+Stack trace:
+		at org.example.filters.LogGlobalFilter.filter(LogGlobalFilter.java:33)
+		at org.springframework.cloud.gateway.handler.FilteringWebHandler$GatewayFilterAdapter.filter(FilteringWebHandler.java:138)
+		at org.springframework.cloud.gateway.filter.OrderedGatewayFilter.filter(OrderedGatewayFilter.java:44)
+		at org.springframework.cloud.gateway.handler.FilteringWebHandler$DefaultGatewayFilterChain.lambda$filter$0(FilteringWebHandler.java:118)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:44)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4252)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:253)
+		at reactor.core.publisher.MonoIgnoreThen.subscribe(MonoIgnoreThen.java:51)
+		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:64)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:52)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:52)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:234)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.onComplete(MonoIgnoreThen.java:201)
+		at reactor.core.publisher.FluxContextStart$ContextStartSubscriber.onComplete(FluxContextStart.java:115)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:141)
+		at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onNext(FluxSwitchIfEmpty.java:67)
+		at reactor.core.publisher.Operators$MonoInnerProducerBase.complete(Operators.java:2655)
+		at reactor.core.publisher.MonoSingle$SingleSubscriber.onComplete(MonoSingle.java:173)
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:136)
+		at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onComplete(FluxSwitchIfEmpty.java:78)
+		at reactor.core.publisher.Operators$ScalarSubscription.request(Operators.java:2395)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.set(Operators.java:2190)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onSubscribe(Operators.java:2064)
+		at reactor.core.publisher.MonoJust.subscribe(MonoJust.java:54)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:52)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4252)
+		at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onComplete(FluxSwitchIfEmpty.java:75)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onComplete(MonoFlatMap.java:174)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onComplete(Operators.java:2054)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onComplete(Operators.java:2054)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onComplete(FluxMapFuseable.java:144)
+		at reactor.core.publisher.FluxContextStart$ContextStartSubscriber.onComplete(FluxContextStart.java:115)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableConditionalSubscriber.onComplete(FluxMapFuseable.java:336)
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableConditionalSubscriber.onComplete(FluxFilterFuseable.java:384)
+		at reactor.core.publisher.Operators$MonoSubscriber.complete(Operators.java:1813)
+		at reactor.core.publisher.MonoCollect$CollectSubscriber.onComplete(MonoCollect.java:152)
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:136)
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:252)
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:136)
+		at reactor.netty.channel.FluxReceive.onInboundComplete(FluxReceive.java:383)
+		at reactor.netty.channel.ChannelOperations.onInboundComplete(ChannelOperations.java:373)
+		at reactor.netty.http.server.HttpServerOperations.onInboundNext(HttpServerOperations.java:505)
+		at reactor.netty.channel.ChannelOperationsHandler.channelRead(ChannelOperationsHandler.java:96)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357)
+		at reactor.netty.http.server.HttpTrafficHandler.channelRead(HttpTrafficHandler.java:235)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357)
+		at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelRead(CombinedChannelDuplexHandler.java:436)
+		at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:324)
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:296)
+		at io.netty.channel.CombinedChannelDuplexHandler.channelRead(CombinedChannelDuplexHandler.java:251)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357)
+		at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)
+		at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919)
+		at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166)
+		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:719)
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:655)
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:581)
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:493)
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989)
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+		at java.lang.Thread.run(Thread.java:748)
+21-10-27.14:43:28.674 [reactor-http-nio-2] ERROR AbstractErrorWebExceptionHandler - [a149f791-1]  500 Server Error for HTTP GET "/index/index0"
+java.lang.ClassCastException: org.example.config.ModifiedRequestDecorator$1 cannot be cast to org.springframework.http.server.reactive.AbstractServerHttpRequest
+	at org.example.filters.LogGlobalFilter.filter(LogGlobalFilter.java:33)
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	|_ checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	|_ checkpoint ⇢ HTTP GET "/index/index0" [ExceptionHandlingWebHandler]
+Stack trace:
+		at org.example.filters.LogGlobalFilter.filter(LogGlobalFilter.java:33)
+		at org.springframework.cloud.gateway.handler.FilteringWebHandler$GatewayFilterAdapter.filter(FilteringWebHandler.java:138)
+		at org.springframework.cloud.gateway.filter.OrderedGatewayFilter.filter(OrderedGatewayFilter.java:44)
+		at org.springframework.cloud.gateway.handler.FilteringWebHandler$DefaultGatewayFilterChain.lambda$filter$0(FilteringWebHandler.java:118)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:44)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4252)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:253)
+		at reactor.core.publisher.MonoIgnoreThen.subscribe(MonoIgnoreThen.java:51)
+		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:64)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:52)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:52)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:234)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.onComplete(MonoIgnoreThen.java:201)
+		at reactor.core.publisher.FluxContextStart$ContextStartSubscriber.onComplete(FluxContextStart.java:115)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:141)
+		at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onNext(FluxSwitchIfEmpty.java:67)
+		at reactor.core.publisher.Operators$MonoInnerProducerBase.complete(Operators.java:2655)
+		at reactor.core.publisher.MonoSingle$SingleSubscriber.onComplete(MonoSingle.java:173)
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:136)
+		at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onComplete(FluxSwitchIfEmpty.java:78)
+		at reactor.core.publisher.Operators$ScalarSubscription.request(Operators.java:2395)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.set(Operators.java:2190)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onSubscribe(Operators.java:2064)
+		at reactor.core.publisher.MonoJust.subscribe(MonoJust.java:54)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:52)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4252)
+		at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onComplete(FluxSwitchIfEmpty.java:75)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onComplete(MonoFlatMap.java:174)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onComplete(Operators.java:2054)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onComplete(Operators.java:2054)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onComplete(FluxMapFuseable.java:144)
+		at reactor.core.publisher.FluxContextStart$ContextStartSubscriber.onComplete(FluxContextStart.java:115)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableConditionalSubscriber.onComplete(FluxMapFuseable.java:336)
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableConditionalSubscriber.onComplete(FluxFilterFuseable.java:384)
+		at reactor.core.publisher.Operators$MonoSubscriber.complete(Operators.java:1813)
+		at reactor.core.publisher.MonoCollect$CollectSubscriber.onComplete(MonoCollect.java:152)
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:136)
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:252)
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:136)
+		at reactor.netty.channel.FluxReceive.onInboundComplete(FluxReceive.java:383)
+		at reactor.netty.channel.ChannelOperations.onInboundComplete(ChannelOperations.java:373)
+		at reactor.netty.http.server.HttpServerOperations.onInboundNext(HttpServerOperations.java:505)
+		at reactor.netty.channel.ChannelOperationsHandler.channelRead(ChannelOperationsHandler.java:96)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357)
+		at reactor.netty.http.server.HttpTrafficHandler.channelRead(HttpTrafficHandler.java:235)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357)
+		at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelRead(CombinedChannelDuplexHandler.java:436)
+		at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:324)
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:296)
+		at io.netty.channel.CombinedChannelDuplexHandler.channelRead(CombinedChannelDuplexHandler.java:251)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357)
+		at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)
+		at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919)
+		at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166)
+		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:719)
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:655)
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:581)
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:493)
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989)
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+		at java.lang.Thread.run(Thread.java:748)
+21-10-27.14:54:19.481 [http-nio-8081-exec-3] ERROR [httpHandlerServlet]   - Servlet.service() for servlet [httpHandlerServlet] in context with path [] threw exception [Servlet execution threw an exception] with root cause
+java.lang.ClassNotFoundException: org.apache.commons.codec.binary.Base64
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:382)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:418)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:355)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:351)
+	at com.jd.jr.merchant.login.interceptor.util.BASE64.encode(BASE64.java:773)
+	at com.jd.jr.merchant.login.interceptor.util.StringUtils.codeUrl(StringUtils.java:68)
+	at com.jd.jr.merchant.login.interceptor.JrAccountInterceptor.remark2LoginPage(JrAccountInterceptor.java:194)
+	at com.jd.jr.merchant.login.interceptor.JrAccountInterceptor.remarkHandle(JrAccountInterceptor.java:158)
+	at com.jd.jr.merchant.login.interceptor.JrAccountInterceptor.preHandle(JrAccountInterceptor.java:119)
+	at org.example.filters.LogGlobalFilter.filter(LogGlobalFilter.java:41)
+	at org.springframework.cloud.gateway.handler.FilteringWebHandler$GatewayFilterAdapter.filter(FilteringWebHandler.java:138)
+	at org.springframework.cloud.gateway.filter.OrderedGatewayFilter.filter(OrderedGatewayFilter.java:44)
+	at org.springframework.cloud.gateway.handler.FilteringWebHandler$DefaultGatewayFilterChain.lambda$filter$0(FilteringWebHandler.java:118)
+	at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:44)
+	at reactor.core.publisher.Mono.subscribe(Mono.java:4252)
+	at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:253)
+	at reactor.core.publisher.MonoIgnoreThen.subscribe(MonoIgnoreThen.java:51)
+	at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:64)
+	at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:52)
+	at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:52)
+	at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:64)
+	at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:52)
+	at reactor.core.publisher.Mono.subscribe(Mono.java:4252)
+	at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:253)
+	at reactor.core.publisher.MonoIgnoreThen.subscribe(MonoIgnoreThen.java:51)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:150)
+	at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onNext(FluxSwitchIfEmpty.java:67)
+	at reactor.core.publisher.MonoNext$NextSubscriber.onNext(MonoNext.java:76)
+	at reactor.core.publisher.FluxConcatMap$ConcatMapImmediate.innerNext(FluxConcatMap.java:274)
+	at reactor.core.publisher.FluxConcatMap$ConcatMapInner.onNext(FluxConcatMap.java:851)
+	at reactor.core.publisher.FluxMap$MapSubscriber.onNext(FluxMap.java:114)
+	at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onNext(FluxSwitchIfEmpty.java:67)
+	at reactor.core.publisher.Operators$MonoSubscriber.complete(Operators.java:1812)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:144)
+	at reactor.core.publisher.FluxMap$MapSubscriber.onNext(FluxMap.java:114)
+	at reactor.core.publisher.MonoNext$NextSubscriber.onNext(MonoNext.java:76)
+	at reactor.core.publisher.FluxConcatMap$ConcatMapImmediate.innerNext(FluxConcatMap.java:274)
+	at reactor.core.publisher.FluxConcatMap$ConcatMapInner.onNext(FluxConcatMap.java:851)
+	at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onNext(FluxOnErrorResume.java:73)
+	at reactor.core.publisher.MonoPeekTerminal$MonoTerminalPeekSubscriber.onNext(MonoPeekTerminal.java:173)
+	at reactor.core.publisher.Operators$MonoSubscriber.complete(Operators.java:1812)
+	at reactor.core.publisher.MonoFilterWhen$MonoFilterWhenMain.onNext(MonoFilterWhen.java:140)
+	at reactor.core.publisher.Operators$ScalarSubscription.request(Operators.java:2393)
+	at reactor.core.publisher.MonoFilterWhen$MonoFilterWhenMain.onSubscribe(MonoFilterWhen.java:103)
+	at reactor.core.publisher.MonoJust.subscribe(MonoJust.java:54)
+	at reactor.core.publisher.Mono.subscribe(Mono.java:4252)
+	at reactor.core.publisher.FluxConcatMap$ConcatMapImmediate.drain(FluxConcatMap.java:441)
+	at reactor.core.publisher.FluxConcatMap$ConcatMapImmediate.onNext(FluxConcatMap.java:243)
+	at reactor.core.publisher.FluxDematerialize$DematerializeSubscriber.onNext(FluxDematerialize.java:91)
+	at reactor.core.publisher.FluxDematerialize$DematerializeSubscriber.onNext(FluxDematerialize.java:38)
+	at reactor.core.publisher.FluxIterable$IterableSubscription.slowPath(FluxIterable.java:267)
+	at reactor.core.publisher.FluxIterable$IterableSubscription.request(FluxIterable.java:225)
+	at reactor.core.publisher.FluxDematerialize$DematerializeSubscriber.request(FluxDematerialize.java:120)
+	at reactor.core.publisher.FluxConcatMap$ConcatMapImmediate.onSubscribe(FluxConcatMap.java:228)
+	at reactor.core.publisher.FluxDematerialize$DematerializeSubscriber.onSubscribe(FluxDematerialize.java:70)
+	at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:161)
+	at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:86)
+	at reactor.core.publisher.InternalFluxOperator.subscribe(InternalFluxOperator.java:62)
+	at reactor.core.publisher.FluxDefer.subscribe(FluxDefer.java:54)
+	at reactor.core.publisher.Mono.subscribe(Mono.java:4252)
+	at reactor.core.publisher.FluxConcatMap$ConcatMapImmediate.drain(FluxConcatMap.java:441)
+	at reactor.core.publisher.FluxConcatMap$ConcatMapImmediate.onSubscribe(FluxConcatMap.java:211)
+	at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:161)
+	at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:86)
+	at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:64)
+	at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:52)
+	at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:64)
+	at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:52)
+	at reactor.core.publisher.Mono.subscribe(Mono.java:4252)
+	at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:253)
+	at reactor.core.publisher.MonoIgnoreThen.subscribe(MonoIgnoreThen.java:51)
+	at reactor.core.publisher.Mono.subscribe(Mono.java:4252)
+	at org.springframework.http.server.reactive.ServletHttpHandlerAdapter.service(ServletHttpHandlerAdapter.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1707)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
 	at com.alibaba.mtc.MtContextRunnable.run(MtContextRunnable.java:46)
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
-	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:308)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(ScheduledThreadPoolExecutor.java:180)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:294)
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.lang.Thread.run(Thread.java:748)
-Caused by: com.jd.jsf.gd.error.ClientTimeoutException: [JSF-22110]Waiting provider return response timeout. Start time: 2021-10-26 10:23:52.258, End time: 2021-10-26 10:24:07.569, Client elapsed: 1487ms, Server elapsed: 13824ms, Timeout: 5000ms, MsgHeader: MessageHeader{msgId=5, length=347, codecType=2, msgType=1, protocolType=1, compressType=0, headerLength=19, keysMap= 1 : 5000 7 : 1744}, Channel: 10.13.153.169:56838 -> 11.50.214.21:40660.
-	at com.jd.jsf.gd.client.MsgFuture.clientTimeoutException(MsgFuture.java:197)
-	at com.jd.jsf.gd.client.MsgFuture.get(MsgFuture.java:174)
-	at com.jd.jsf.gd.transport.AbstractTCPClientTransport.send(AbstractTCPClientTransport.java:66)
-	at com.jd.jsf.gd.transport.JSFClientTransport.send(JSFClientTransport.java:34)
-	at com.jd.jsf.gd.client.Client.sendMsg0(Client.java:676)
-	at com.jd.jsf.gd.client.FailoverClient.doSendMsg(FailoverClient.java:68)
-	... 23 common frames omitted
-21-10-26.10:53:45.963 [main            ] ERROR LoggingFailureAnalysisReporter - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Spring MVC found on classpath, which is incompatible with Spring Cloud Gateway.
-
-Action:
-
-Please set spring.main.web-application-type=reactive or remove spring-boot-starter-web dependency.
-
-21-10-26.10:56:23.083 [main            ] ERROR LoggingFailureAnalysisReporter - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Spring MVC found on classpath, which is incompatible with Spring Cloud Gateway.
-
-Action:
-
-Please set spring.main.web-application-type=reactive or remove spring-boot-starter-web dependency.
-
-21-10-26.10:57:25.767 [main            ] ERROR LoggingFailureAnalysisReporter - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Spring MVC found on classpath, which is incompatible with Spring Cloud Gateway.
-
-Action:
-
-Please set spring.main.web-application-type=reactive or remove spring-boot-starter-web dependency.
-
-21-10-26.11:19:35.787 [JSF-jsfRegistry-HB&Retry-7-T-1] ERROR RegistryServiceClient  - Send heartbeat to 11.50.214.21:40660 error
-com.jd.jsf.gd.error.RpcException: [JSF-22103]Failed to call com.jd.jsf.service.RegistryService.doHeartbeat on remote server: [jsf://11.50.214.21:40660/?jsfVersion=1551], cause by: com.jd.jsf.gd.error.ClientTimeoutException, message is: [JSF-22110]Waiting provider return response timeout. Start time: 2021-10-26 11:19:11.323, End time: 2021-10-26 11:19:27.544, Client elapsed: 1ms, Server elapsed: 16220ms, Timeout: 5000ms, MsgHeader: MessageHeader{msgId=4, length=348, codecType=2, msgType=1, protocolType=1, compressType=0, headerLength=19, keysMap= 1 : 5000 7 : 1744}, Channel: 10.13.153.169:61183 -> 11.50.214.21:40660.
-	at com.jd.jsf.gd.client.FailoverClient.doSendMsg(FailoverClient.java:94)
-	at com.jd.jsf.gd.client.TransportResettableClient.doSendMsg(TransportResettableClient.java:43)
-	at com.jd.jsf.gd.client.Client.sendMsg(Client.java:550)
-	at com.jd.jsf.gd.filter.ConsumerInvokeFilter.invoke(ConsumerInvokeFilter.java:80)
-	at com.jd.jsf.gd.filter.ConsumerMonitorFilter.invoke(ConsumerMonitorFilter.java:59)
-	at com.jd.jsf.gd.filter.ConsumerConcurrentsFilter.invoke(ConsumerConcurrentsFilter.java:80)
-	at com.jd.jsf.gd.filter.MockFilter.invoke(MockFilter.java:56)
-	at com.jd.jsf.gd.filter.ConsumerContextFilter.invoke(ConsumerContextFilter.java:56)
-	at com.jd.jsf.gd.filter.ConsumerExceptionFilter.invoke(ConsumerExceptionFilter.java:29)
-	at com.jd.jsf.gd.filter.FilterChain.invoke(FilterChain.java:292)
-	at com.jd.jsf.gd.client.ClientProxyInvoker.invoke(ClientProxyInvoker.java:111)
-	at com.jd.jsf.service.RegistryService_proxy_0.doHeartbeat(RegistryService_proxy_0.java)
-	at com.jd.jsf.gd.registry.jsf.RegistryServiceClient.doHeartbeat(RegistryServiceClient.java:283)
-	at com.jd.jsf.gd.registry.jsf.RegistryServiceClient.sendHeartBeat(RegistryServiceClient.java:411)
-	at com.jd.jsf.gd.registry.jsf.RegistryServiceClient.access$100(RegistryServiceClient.java:41)
-	at com.jd.jsf.gd.registry.jsf.RegistryServiceClient$1.run(RegistryServiceClient.java:353)
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
-	at java.util.concurrent.FutureTask.runAndReset$$$capture(FutureTask.java:308)
-	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(ScheduledThreadPoolExecutor.java:180)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:294)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-Caused by: com.jd.jsf.gd.error.ClientTimeoutException: [JSF-22110]Waiting provider return response timeout. Start time: 2021-10-26 11:19:11.323, End time: 2021-10-26 11:19:27.544, Client elapsed: 1ms, Server elapsed: 16220ms, Timeout: 5000ms, MsgHeader: MessageHeader{msgId=4, length=348, codecType=2, msgType=1, protocolType=1, compressType=0, headerLength=19, keysMap= 1 : 5000 7 : 1744}, Channel: 10.13.153.169:61183 -> 11.50.214.21:40660.
-	at com.jd.jsf.gd.client.MsgFuture.clientTimeoutException(MsgFuture.java:197)
-	at com.jd.jsf.gd.client.MsgFuture.get(MsgFuture.java:174)
-	at com.jd.jsf.gd.transport.AbstractTCPClientTransport.send(AbstractTCPClientTransport.java:66)
-	at com.jd.jsf.gd.transport.JSFClientTransport.send(JSFClientTransport.java:34)
-	at com.jd.jsf.gd.client.Client.sendMsg0(Client.java:676)
-	at com.jd.jsf.gd.client.FailoverClient.doSendMsg(FailoverClient.java:68)
-	... 23 common frames omitted
-21-10-26.11:19:35.790 [main            ] ERROR LoggingFailureAnalysisReporter - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Spring MVC found on classpath, which is incompatible with Spring Cloud Gateway.
-
-Action:
-
-Please set spring.main.web-application-type=reactive or remove spring-boot-starter-web dependency.
-
-21-10-26.15:59:13.967 [main            ] ERROR LoggingFailureAnalysisReporter - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Spring MVC found on classpath, which is incompatible with Spring Cloud Gateway.
-
-Action:
-
-Please set spring.main.web-application-type=reactive or remove spring-boot-starter-web dependency.
-
-21-10-26.20:29:55.877 [main            ] ERROR LoggingFailureAnalysisReporter - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Parameter 0 of method modifyRequestBodyGatewayFilterFactory in org.springframework.cloud.gateway.config.GatewayAutoConfiguration required a bean of type 'org.springframework.http.codec.ServerCodecConfigurer' that could not be found.
-
-
-Action:
-
-Consider defining a bean of type 'org.springframework.http.codec.ServerCodecConfigurer' in your configuration.
-
