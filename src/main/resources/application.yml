@@ -3,11 +3,21 @@ server:
   tomcat:
     max-threads: 500
 
+
+
 # spring-gateway
 spring:
   cloud:
     gateway:
       routes:
+
+        - id: http_index0
+          uri: http://www.baidu.com
+          filters:
+            - StripPrefix=2
+          predicates:
+            - Path=/index/index0
+
         - id: http_index
           uri: http://localhost:8080
           predicates:

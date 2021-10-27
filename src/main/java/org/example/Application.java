@@ -3,11 +3,13 @@ package org.example;
 import org.example.filters.JsfGatewayFilterFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
+import reactor.core.publisher.Hooks;
 import reactor.core.publisher.Mono;
 
 import static com.jd.jsf.gd.msg.ResponseListenersCaller.build;

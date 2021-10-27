@@ -62,10 +62,10 @@
 
     <logger name="org.springframework" level="ERROR"/>
     <logger name="org.springframework.cloud.gateway" level="TRACE"/>
-    <logger name="org.springframework.http.server.reactive" level="ERROR"/>
-    <logger name="org.springframework.web.reactive" level="ERROR"/>
+    <logger name="org.springframework.http.server.reactive" level="TRACE"/>
+    <logger name="org.springframework.web.reactive" level="TRACE"/>
     <logger name="org.springframework.boot.autoconfigure.web" level="ERROR"/>
-    <logger name="reactor.netty" level="ERROR"/>
+    <logger name="reactor.netty" level="TRACE"/>
 <!--    <logger name="redisratelimiter" level="INFO"/>-->
 
     <root level="DEBUG">
